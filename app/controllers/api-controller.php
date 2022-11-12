@@ -18,13 +18,13 @@ class ApiController
         $this->data = file_get_contents("php://input");
         $this->helper = new AuthHelper();
         $this->columns  = array(
-            "idTrip",
+            "id",
             "placeOfDeparture",
             "placeOfDestination",
             "date",
             "passengers",
             "price",
-            "airline_fk",
+            "airline",
         );
         $this->order = array(
             "asc",

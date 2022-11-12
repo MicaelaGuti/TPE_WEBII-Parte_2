@@ -1,18 +1,18 @@
 <?php
 class TripModel
 {
-    //modelo de datos de la tabla "capitulos"
+    //modelo de datos de la tabla "trips"
 
     private $db;
 
     function __construct()
     {
-        $this->db = new PDO('mysql:host=localhost;' . 'dbname=tpe;' . 'charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;' . 'dbname=db_tickets;' . 'charset=utf8', 'root', '');
     }
     function existeColumna()
     {
         try {
-            $query = $this->db->prepare("SHOW COLUMS FROM capitulos");
+            $query = $this->db->prepare("SHOW COLUMS FROM trips");
             $query->execute();
             $resultado = $query->fetchAll(PDO::FETCH_OBJ);
         } catch (\Throwable $th) {
@@ -28,100 +28,100 @@ class TripModel
         if (isset($sort) &&  isset($order) && isset($page) && isset($limit) && isset($filter)) {
             $offset = (($page - 1) * $limit);
 
-            $query = $this->db->prepare("SELECT * FROM capitulos WHERE titulo_cap LIKE '%$filter%' OR descripcion LIKE '%$filter%' OR numero_cap LIKE '$filter' ORDER BY $sort $order LIMIT $offset , $limit");
+            $query = $this->db->prepare("SELECT * FROM trips WHERE 	placeOfDeparture LIKE '%$filter%' OR placeOfDestination LIKE '%$filter%' OR airline LIKE '$filter' ORDER BY $sort $order LIMIT $offset , $limit");
             $query->execute();
-            $chapters = $query->fetchAll(PDO::FETCH_OBJ);
-            return $chapters;
+            $trips = $query->fetchAll(PDO::FETCH_OBJ);
+            return $trips;
         } else if (isset($sort) && isset($order) && isset($filter)) {
-            $query = $this->db->prepare("SELECT * FROM capitulos WHERE titulo_cap LIKE '%$filter%' OR descripcion LIKE '%$filter%' OR numero_cap LIKE '$filter' ORDER BY $sort $order");
+            $query = $this->db->prepare("SELECT * FROM trips WHERE placeOfDeparture LIKE '%$filter%' OR placeOfDestination LIKE '%$filter%' OR airline LIKE '$filter' ORDER BY $sort $order");
             $query->execute();
-            $chapters = $query->fetchAll(PDO::FETCH_OBJ);
-            return $chapters;
+            $trips = $query->fetchAll(PDO::FETCH_OBJ);
+            return $trips;
         } else if (isset($sort) && isset($order) && isset($page) && isset($limit)) {
             $offset = (($page - 1) * $limit);
 
-            $query = $this->db->prepare("SELECT * FROM capitulos ORDER BY $sort $order LIMIT $offset , $limit");
+            $query = $this->db->prepare("SELECT * FROM trips ORDER BY $sort $order LIMIT $offset , $limit");
             $query->execute();
-            $chapters = $query->fetchAll(PDO::FETCH_OBJ);
-            return $chapters;
+            $trips = $query->fetchAll(PDO::FETCH_OBJ);
+            return $trips;
         } else if (isset($sort) && isset($order)) {
-            $query = $this->db->prepare("SELECT * FROM capitulos ORDER BY $sort $order");
+            $query = $this->db->prepare("SELECT * FROM trips ORDER BY $sort $order");
             $query->execute();
-            $chapters = $query->fetchAll(PDO::FETCH_OBJ);
-            return $chapters;
+            $trips = $query->fetchAll(PDO::FETCH_OBJ);
+            return $trips;
         } else if (isset($filter)) {
-            $query = $this->db->prepare("SELECT * FROM capitulos WHERE titulo_cap LIKE '%$filter%' OR descripcion LIKE '%$filter%' OR numero_cap LIKE '$filter'");
+            $query = $this->db->prepare("SELECT * FROM trips WHERE placeOfDeparture LIKE '%$filter%' OR placeOfDestination LIKE '%$filter%' OR airline LIKE '$filter'");
             $query->execute();
-            $chapters = $query->fetchAll(PDO::FETCH_OBJ);
-            return $chapters;
+            $trips = $query->fetchAll(PDO::FETCH_OBJ);
+            return $trips;
         } else {
-            $query = $this->db->prepare("SELECT * FROM capitulos");
+            $query = $this->db->prepare("SELECT * FROM trips");
             $query->execute();
-            $chapters = $query->fetchAll(PDO::FETCH_OBJ);
-            return $chapters;
+            $trips = $query->fetchAll(PDO::FETCH_OBJ);
+            return $trips;
         }
     }
     function filterByField($field, $filter)
     {
         if (is_numeric($filter))
-            $query = $this->db->prepare("SELECT * FROM capitulos WHERE $field  = $filter");
+            $query = $this->db->prepare("SELECT * FROM trips WHERE $field  = $filter");
         else
-            $query = $this->db->prepare("SELECT * FROM capitulos WHERE $field LIKE '%$filter%'");
+            $query = $this->db->prepare("SELECT * FROM trips WHERE $field LIKE '%$filter%'");
         $query->execute();
-        $chapters = $query->fetchAll(PDO::FETCH_OBJ);
-        return $chapters;
+        $trips = $query->fetchAll(PDO::FETCH_OBJ);
+        return $trips;
     }
     function filterPages($filter, $page, $limit)
     {
         $offset = ($page - 1 * $limit);
         if (is_numeric($filter))
-            $query = $this->db->prepare("SELECT * FROM capitulos WHERE titulo_cap = $filter OR descripcion = $filter OR numero_cap = $filter LIMIT $offset , $limit ");
+            $query = $this->db->prepare("SELECT * FROM trips WHERE placeOfDeparture = $filter OR placeOfDestination = $filter OR airline = $filter LIMIT $offset , $limit ");
         else
-            $query = $this->db->prepare("SELECT * FROM capitulos WHERE titulo_cap LIKE '%$filter%' OR descripcion LIKE '%$filter%' OR numero_cap LIKE '$filter' LIMIT $offset , $limit");
+            $query = $this->db->prepare("SELECT * FROM trips WHERE placeOfDeparture LIKE '%$filter%' OR placeOfDestination LIKE '%$filter%' OR airline LIKE '$filter' LIMIT $offset , $limit");
 
         $query->execute();
-        $chapters = $query->fetchAll(PDO::FETCH_OBJ);
-        return $chapters;
+        $trips = $query->fetchAll(PDO::FETCH_OBJ);
+        return $trips;
     }
 
     function filterTrips($id)
     {
-        $query = $this->db->prepare("SELECT * FROM capitulos INNER JOIN temporadas  WHERE capitulos.id_temp_fk = ? AND temporadas.id_temp = ?");
+        $query = $this->db->prepare("SELECT * FROM trips INNER JOIN airlines  WHERE trips.airline = ? AND airlines.airline = ?");
         $query->execute([$id, $id]);
-        $chapters = $query->fetchAll(PDO::FETCH_OBJ);
-        return $chapters;
+        $trips = $query->fetchAll(PDO::FETCH_OBJ);
+        return $trips;
     }
     function get($id)
     {
-        $query = $this->db->prepare("SELECT * FROM capitulos WHERE id_capitulo = ?");
+        $query = $this->db->prepare("SELECT * FROM trips WHERE id = ?");
         $query->execute([$id]);
-        $chapter = $query->fetch(PDO::FETCH_OBJ);
-        return $chapter;
+        $trip= $query->fetch(PDO::FETCH_OBJ);
+        return $trip;
     }
     function delete($id)
     {
-        $query = $this->db->prepare("DELETE FROM capitulos WHERE id_capitulo = ?");
+        $query = $this->db->prepare("DELETE FROM trips WHERE id = ?");
         $query->execute([$id]);
     }
-    function insert($title, $description, $numero_cap, $season)
+    function insert($date, $passengers, $placeOfDepature, $placeOfDestination, $price, $airline )
     {
-        $query = $this->db->prepare("INSERT INTO capitulos(titulo_cap , descripcion , numero_cap , id_temp_fk) VALUES (? , ? , ? , ?)");
-        $query->execute(array($title, $description, $numero_cap, $season));
+        $query = $this->db->prepare("INSERT INTO trips( date , passengers , placeOfDeparture , placeOfDestination, price, airline) VALUES (? , ? , ? , ? , ? , ?)");
+        $query->execute(array($date, $passengers, $placeOfDepature, $placeOfDestination, $price, $airline ));
         return $this->db->lastInsertId();
     }
-    function update($title, $description, $id)
+    function update($date, $passengers, $price, $id)
     {
-        $query = $this->db->prepare("UPDATE capitulos SET titulo_cap = ? , descripcion = ? WHERE id_capitulo = ? ");
-        $query->execute(array($title, $description, $id));
+        $query = $this->db->prepare("UPDATE trips SET date = ? , passengers = ? , price = ? WHERE id = ? ");
+        $query->execute(array($date, $passengers, $price, $id));
     }
     function pagination($page, $limit)
     {
-        //
+        
         $page = $_GET['page'];
         $limit = $_GET['limit'];
         $offset = (($page - 1) * $limit);
 
-        $query = $this->db->prepare("SELECT * FROM capitulos  LIMIT $offset , $limit");
+        $query = $this->db->prepare("SELECT * FROM trips  LIMIT $offset , $limit");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
