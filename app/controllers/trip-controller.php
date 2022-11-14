@@ -188,10 +188,10 @@ class ApiController
                 return;
             }
             $trip = $this->getData();
-            if (empty($trip->placeOfDeparture) || empty($trip->placeOfDestination) || empty($trip->date) || empty($trip->passengers) || empty($trip->price)|| empty($trip->airline_fk)) {
+            if (empty($trip->date) || empty($trip->passengers) || empty($trip->placeOfDeparture) || empty($trip->placeOfDestination) || empty($trip->price)|| empty($trip->airline_fk)) {
                 $this->api_view->response("Complete todos los datos", 400);
             } else {
-                $id = $this->trip_model->insert($trip->placeOfDeparture, $trip->placeOfDestination, $trip->date, $trip->passengers, $trip->price, $trip->airline_fk);
+                $id = $this->trip_model->insert($trip->date, $trip->passengers, $trip->placeOfDeparture, $trip->placeOfDestination, $trip->price, $trip->airline_fk);
                 $trip = $this->trip_model->get($id);
                 $this->api_view->response($trip, 201, "Se agrego correctamente el viaje con el id $id");
             }

@@ -1,6 +1,6 @@
 <?php
 require_once '../Travello-rest/libs/Router.php';
-require_once '../Travello-rest/app/controllers/api-controller.php';
+require_once '../Travello-rest/app/controllers/trip-controller.php';
 require_once '../Travello-rest/app/controllers/auth-api-controller.php';
 
 //instancia el Router

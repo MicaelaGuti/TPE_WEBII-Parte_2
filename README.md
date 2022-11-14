@@ -28,7 +28,16 @@ Segunda entrega para el trabajo practico de Web II. Se generó una API REST de c
 			URL = api/trips 
 			Code = 201 
 			Response = Blog
-				
+	...		
+	Insertar viaje con el siguiente formato: 
+		"date": "25/10/22",
+        "passengers": 30,
+        "placeOfDeparture": "Doha (QAT)",
+        "placeOfDestination": "Buenos Aires(ARG)",
+        "price": 203.678,
+        "airline": 3	
+	...
+			
 **Editar un viaje:** http://localhost/carpetalocal/Travello-rest/api/trips/:ID
 
 			>Method = PUT
@@ -41,6 +50,7 @@ Segunda entrega para el trabajo practico de Web II. Se generó una API REST de c
 			URL = api/trips/:ID 
 			Code = 200 
 			Response = Blog
+
 **Paginación (Agregar parámetros de consulta a las solicitudes GET):** http://localhost/carpetalocal/Travello-rest/api/trips?page=number&limit=number
 
 **Ordenado (Agregar parámetros de consulta a las solicitudes GET):** http://localhost/carpetalocal/Travello-rest/api/trips?sort=field&order=desc
