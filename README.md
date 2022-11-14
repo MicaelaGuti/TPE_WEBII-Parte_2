@@ -44,6 +44,13 @@ Segunda entrega para el trabajo practico de Web II. Se generó una API REST de c
 			URL = api/trips/:ID 
 			Code = 201
 			Response = Blog
+	...
+	Modificar un viaje con el siguente formato: 
+		"date": 23/12/22,
+		"passengers": 56,
+		"price":89.236
+	...
+	
 **Borrar un viaje:** http://localhost/carpetalocal/Travello-rest/api/trips/:ID
 
 			>Method = DELETE
