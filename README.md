@@ -1,8 +1,8 @@
 # TP WEB 2 - PARTE 2
 Segunda entrega para el trabajo practico de Web II. Se generó una API REST de carácter publica  para la empresa de viajes "Travello". La misma se puede consumir por Postman con los siguientes endpoints: 
 
- **El endpoint de la API es (Trae todos los viajes):** http://localhost/carpetalocal/Travello-rest/api/trips
- 
+ **El endpoint de la API es (Trae todos los viajes):** 
+ http://localhost/carpetalocal/Travello-rest/api/trips
 		  > Method = GET 
 			 URL = api/trips 
 			 Code = 200 
