@@ -1,7 +1,7 @@
 <?php
 class UserModel
 {
-    //modelo de datos de la tabla "trips"
+    //modelo de datos de la tabla "users"
 
     private $db;
 
