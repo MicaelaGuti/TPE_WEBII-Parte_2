@@ -1,7 +1,7 @@
 <?php
 require_once '../Travello-rest/libs/Router.php';
 require_once '../Travello-rest/app/controllers/trip-controller.php';
-require_once '../Travello-rest/app/controllers/auth-api-controller.php';
+
 
 //instancia el Router
 $router = new Router();
@@ -13,6 +13,6 @@ $router->addRoute('trips/:ID', 'DELETE', 'ApiController', 'deleteTrip');
 $router->addRoute('trips', 'POST', 'ApiController', 'insertTrip');
 $router->addRoute('trips/:ID', 'PUT', 'ApiController', 'updateTrip');
 
-$router->addRoute('auth/token', 'GET', 'AuthApiController', 'getToken');
+
 
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
