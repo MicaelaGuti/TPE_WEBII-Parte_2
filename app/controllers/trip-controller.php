@@ -8,7 +8,6 @@ class ApiController
     private $trip_model;
     private $api_view;
     private $data;
-    private $helper;
     private $columns;
     private $order;
     function __construct()
@@ -155,7 +154,7 @@ class ApiController
                 http_response_code(404);
             }
         } catch (\Throwable $th) {
-            http_response_code(500);;
+            http_response_code(500);
         }
     }
 
@@ -222,18 +221,5 @@ class ApiController
         
     }
 
-//     function filterTrips($params = null)
-//     {
-//         //devuelve un arreglo de items dependiendo su aerolinea (id_fk) 
-//         try {
-//             $id_fk = $_GET['airline'];
 
-//             $trips = $this->trip_model->filterTrips($id_fk);
-//             if ($trips) {
-//                 $this->api_view->response($trips);
-//             }
-//         } catch (\Throwable $th) {
-//             http_response_code(500);;
-//         }
-//     }
  }
