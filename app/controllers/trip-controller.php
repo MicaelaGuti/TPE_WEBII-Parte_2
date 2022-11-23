@@ -44,6 +44,7 @@ class ApiController
         try {
             $trips = $this->trip_model->getAll();
             if ($trips) {
+                
                 //si hay items en la tabla, entonces comenzamos a trabajar
                 if (!empty($_GET['sort']) && !empty($_GET['order']) && isset($_GET['page']) &&  !empty($_GET['limit']) && !empty($_GET['filter'])) {
                     //ordena pagina y filtra en caso que el usuario setee todos estos parametros $_GET
@@ -110,7 +111,8 @@ class ApiController
                     $this->api_view->response($trips,);
                     http_response_code(200);
                     
-                } else if (isset($_GET['filter']) && isset($_GET['field'])) {
+                } 
+                else if (isset($_GET['filter']) && isset($_GET['field'])) {
                     //filtra por todos los campos de la tabla individualmente
                     $filter = $_GET['filter'];
                     $field = $_GET['field'];
@@ -133,6 +135,7 @@ class ApiController
                         http_response_code(404);;
                     }
                     $this->api_view->response($trips);
+                    
                 } else if (isset($_GET['filter'])) {
                     //filtra por todos los campos de la tabla en caso que setee ese parametro
 
@@ -146,6 +149,7 @@ class ApiController
                 } else {
                     $trips = $this->trip_model->getAll();
                     $this->api_view->response($trips);
+                    
                 }
             } else {
                 http_response_code(404);
@@ -164,10 +168,11 @@ class ApiController
             if ($trip)
                 $this->api_view->response($trip);
             else
-                http_response_code(404);;
+                http_response_code(404);
         } catch (\Throwable $th) {
             http_response_code(500);
         }
+        
     }
     function deleteTrip($params = null)
     {
@@ -216,18 +221,19 @@ class ApiController
             }
         
     }
-    function filterTrips($params = null)
-    {
-        //devuelve un arreglo de items dependiendo su aerolinea (id_fk) 
-        try {
-            $id_fk = $_GET['airline'];
 
-            $trips = $this->trip_model->filterTrips($id_fk);
-            if ($trips) {
-                $this->api_view->response($trips);
-            }
-        } catch (\Throwable $th) {
-            http_response_code(500);;
-        }
-    }
-}
+//     function filterTrips($params = null)
+//     {
+//         //devuelve un arreglo de items dependiendo su aerolinea (id_fk) 
+//         try {
+//             $id_fk = $_GET['airline'];
+
+//             $trips = $this->trip_model->filterTrips($id_fk);
+//             if ($trips) {
+//                 $this->api_view->response($trips);
+//             }
+//         } catch (\Throwable $th) {
+//             http_response_code(500);;
+//         }
+//     }
+ }

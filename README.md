@@ -15,12 +15,6 @@ Segunda entrega para el trabajo practico de Web II. Se generó una API REST de c
 			Code = 200 
 			Response = Blog
 			      
-**Traer un viaje por su aerolinea:** http://localhost/carpetalocal/Travello-rest/api/airlines?airline=1 at 3 
-
-			>Method = GET 
-			URL = api/airlines?airline=1 at 3 
-			Code = 200 
-			Response = array type json
 			
  **Crear un viaje:** http://localhost/carpetalocal/Travello-rest/api/trips
 
@@ -46,7 +40,7 @@ Segunda entrega para el trabajo practico de Web II. Se generó una API REST de c
 			Response = Blog
 	...
 	Modificar un viaje con el siguente formato: 
-		"date": 23/12/22,
+		"date": "23/12/22",
 		"passengers": 56,
 		"price":89.236
 	...
@@ -65,5 +59,3 @@ Segunda entrega para el trabajo practico de Web II. Se generó una API REST de c
 El pedido por defecto es descendiente
 Se puede aordenar de forma ascendente con = asc 
 ```
-**Búsqueda y filtrado (Agregar parámetros de consulta a las solicitudes GET) :** http://localhost/carpetalocal/Travello-rest/api/trips?filter=String o Número **(búsqueda por Todos los campos)**
-o  http://localhost/carpetalocal/Travello-rest/api/trips?field=algo&search=algoparabuscar **(Buscar por un campo)**

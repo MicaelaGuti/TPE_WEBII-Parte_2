@@ -84,13 +84,13 @@ class TripModel
         return $trips;
     }
 
-    function filterTrips($id)
-    {
-        $query = $this->db->prepare("SELECT * FROM trips INNER JOIN airlines  WHERE trips.airline = ? AND airlines.airline = ?");
-        $query->execute([$id, $id]);
-        $trips = $query->fetchAll(PDO::FETCH_OBJ);
-        return $trips;
-    }
+    // function filterTrips($id)
+    // {
+    //     $query = $this->db->prepare("SELECT * FROM trips INNER JOIN airlines  WHERE trips.airline = ? AND airlines.airline = ?");
+    //     $query->execute([$id, $id]);
+    //     $trips = $query->fetchAll(PDO::FETCH_OBJ);
+    //     return $trips;
+    // }
     function get($id)
     {
         $query = $this->db->prepare("SELECT * FROM trips WHERE id = ?");
